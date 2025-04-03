@@ -1,0 +1,44 @@
+---
+- name: Install and Configure MongoDB
+  hosts: mongodb_servers
+  become: yes
+   
+  tasks:
+    - name: Install dependencies
+      apt:
+        name:
+          - gnupg
+          - curl
+        state: present
+        update_cache: yes
+
+
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Install MongoDB
+      apt:
+        name: mongodb-org
+        state: present
+
+    - name: Start and Enable MongoDB service
+      service:
+        name: mongod
+        state: started
+        enabled: yes
+
+    - name: Verify MongoDB is running
+      shell: "systemctl is-active mongod"
+      register: mongo_status
+      changed_when: false
+
+    - name: Print MongoDB status
+      debug:
+        msg: "MongoDB Service Status: {{ mongo_status.stdout }}"
+
+  handlers:
+    - name: Restart MongoDB
+      service:
+        name: mongod
+        state: restarted
