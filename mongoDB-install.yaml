@@ -1,6 +1,6 @@
 ---
 - name: Install and Configure MongoDB
-  hosts: mongodb_servers
+  hosts: node1
   become: yes
    
   tasks:
