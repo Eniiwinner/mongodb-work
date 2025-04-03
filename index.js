@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const mongoURI = 'mongodb+srv://eniiwinner:<db_password>@cluster0.ds4fi1q.mongodb.net/devops?retryWrites=true&w=majority'
 
 mongoose.connect('mongodb://localhost/devops', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -13,3 +14,10 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(3000, () => console.log('App running on port 3000'));
+
+
+
+
+
+
+
