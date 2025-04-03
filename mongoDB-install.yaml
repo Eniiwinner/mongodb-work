@@ -2,49 +2,27 @@
 - name: Install MongoDB
   hosts: node1
   become: yes
-
   tasks:
 
-    - name: Install Git 
-      yum:
-        name: git
-        state: present
-
-    - name: Clone MongoDB custom repository
-      ansible.builtin.git:
-        repo: "https://github.com/Eniiwinner/mongodb-work.git"
+    - name: Add MongoDB repository
+      copy:
         dest: /var/www/html
-        force: yes
-        clone: yes
-        update: no
+        content: |
+          [mongodb-org-6.0]
+          name=MongoDB Repository
+          baseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/6.0/x86_64/
+          gpgcheck=1
+          enabled=1
+          gpgkey=https://www.mongodb.org/static/pgp/server-6.0.asc
 
     - name: Install MongoDB
       yum:
         name: mongodb-org
         state: present
-        enablerepo: mongodb-work
-        disablerepo: '*'
 
-    - name: Start and Enable MongoDB service
+    - name: Start MongoDB service
       service:
         name: mongod
         state: started
         enabled: yes
-
-    - name: Verify MongoDB is running
-      command: systemctl is-active mongod
-      register: mongo_status
-      changed_when: false
-      failed_when: mongo_status.rc != 0
-      check_mode: no
-
-    - name: Show MongoDB status
-      debug:
-        var: mongo_status.stdout
-
-  handlers:
-    - name: Restart MongoDB
-      service:
-        name: mongod
-        state: restarted
 ...
