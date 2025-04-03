@@ -24,10 +24,6 @@
       register: mongo_status
       changed_when: false
 
-    - name: Print MongoDB status
-      debug:
-        msg: "MongoDB Service Status: {{ mongo_status.stdout }}"
-
   handlers:
     - name: Restart MongoDB
       service:
