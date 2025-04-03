@@ -18,10 +18,15 @@
       args:
         creates: /tmp/placeholder
 
+    - name: Install Git 
+      yum:
+        name: git
+        state: present
+
     - name: Clone MongoDB custom repository
       ansible.builtin.git:
         repo: "https://github.com/Eniiwinner/mongodb-work.git"
-        dest: /tmp/mongodb-work
+        dest: /var/www/html
         force: yes
         clone: yes
         update: no
