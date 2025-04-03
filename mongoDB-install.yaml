@@ -6,6 +6,6 @@
   tasks:
     - name: Start MongoDB service
       service:
-        name: mongod
+        name: mongodb
         state: started
         enabled: yes
