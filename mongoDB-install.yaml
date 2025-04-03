@@ -16,7 +16,7 @@
     - name: Clean yum cache
       command: yum clean all
       args:
-        warn: false
+        creates: /tmp/placeholder
 
     - name: Install MongoDB
       yum:
@@ -47,3 +47,4 @@
       service:
         name: mongod
         state: restarted
+...
