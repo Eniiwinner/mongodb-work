@@ -1,10 +1,10 @@
 ---
 - name: Install MongoDB
-  hosts: node1
+  hosts: all
   become: yes
   tasks:
 
-    - name: Add MongoDB repository
+    - name: Add MongoDB 6.0 repository
       copy:
         dest: /etc/yum.repos.d/mongodb-org-6.0.repo
         content: |
@@ -15,9 +15,11 @@
           enabled=1
           gpgkey=https://www.mongodb.org/static/pgp/server-6.0.asc
 
-    - name: Install MongoDB
+    - name: Install MongoDB and dependencies
       yum:
-        name:  mongodb-org
+        name:
+          - mongodb-org
+          - mongodb-org-database
         state: present
 
     - name: Start MongoDB service
@@ -25,5 +27,3 @@
         name: mongod
         state: started
         enabled: yes
-
-...
