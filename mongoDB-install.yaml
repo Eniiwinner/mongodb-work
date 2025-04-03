@@ -6,7 +6,7 @@
 
     - name: Add MongoDB repository
       copy:
-        dest: /var/www/html
+        dest: /etc/yum.repos.d/mongodb-org-6.0.repo
         content: |
           [mongodb-org-6.0]
           name=MongoDB Repository
