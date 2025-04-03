@@ -5,11 +5,11 @@
    
   tasks:
     - name: Update package cache
-      apt:
+      yum:
         update_cache: yes
 
     - name: Install MongoDB
-      apt:
+      yum:
         name: mongodb-org
         state: present
 
