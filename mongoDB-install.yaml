@@ -4,15 +4,6 @@
   become: yes
    
   tasks:
-    - name: Install dependencies
-      yum:
-        name:
-          - gnupg
-          - curl
-        state: present
-        update_cache: yes
-
-
     - name: Update package cache
       apt:
         update_cache: yes
