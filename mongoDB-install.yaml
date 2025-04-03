@@ -19,7 +19,7 @@
 
     - name: Install MongoDB
       yum:
-        name: mongodb-org-6.0
+        name:  MongoDB 6.0 Repository
         state: present
 
     - name: Start and Enable MongoDB service
