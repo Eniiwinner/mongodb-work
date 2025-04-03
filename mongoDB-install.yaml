@@ -13,14 +13,17 @@
         gpgkey: https://www.mongodb.org/static/pgp/server-6.0.asc
         enabled: 1
 
-    - name: Update package cache
-      yum:
-        update_cache: yes
+    - name: Clean yum cache
+      command: yum clean all
+      args:
+        warn: false
 
     - name: Install MongoDB
       yum:
-        name:  MongoDB 6.0 Repository
+        name: mongodb-org
         state: present
+        enablerepo: mongodb-org-6.0
+        disablerepo: '*'
 
     - name: Start and Enable MongoDB service
       service:
