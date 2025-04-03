@@ -15,11 +15,10 @@
           enabled=1
           gpgkey=https://www.mongodb.org/static/pgp/server-6.0.asc
 
-    - name: Install MongoDB and dependencies
+    - name: Install MongoDB
       yum:
         name: 
           - mongodb-org
-          - mongodb-org-database
         state: present
 
     - name: Start MongoDB service
