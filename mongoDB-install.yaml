@@ -1,6 +1,6 @@
 ---
 - name: Install MongoDB on Amazon Linux
-  hosts: all
+  hosts: n1
   become: yes
 
   tasks:
