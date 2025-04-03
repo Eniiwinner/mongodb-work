@@ -2,7 +2,7 @@
 - name: Install and Configure MongoDB
   hosts: node1
   become: yes
-   
+
   tasks:
     - name: Update package cache
       yum:
@@ -10,8 +10,9 @@
 
     - name: Install MongoDB
       yum:
-        name:  mongodb-org-6.0
+        name: mongodb-org
         state: present
+      notify: Restart MongoDB
 
     - name: Start and Enable MongoDB service
       service:
@@ -20,9 +21,15 @@
         enabled: yes
 
     - name: Verify MongoDB is running
-      shell: "systemctl is-active mongod"
+      command: systemctl is-active mongod
       register: mongo_status
       changed_when: false
+      failed_when: mongo_status.rc != 0
+      check_mode: no
+
+    - name: Show MongoDB status
+      debug:
+        var: mongo_status.stdout
 
   handlers:
     - name: Restart MongoDB
